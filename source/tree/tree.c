@@ -1,18 +1,12 @@
 #include <stdio.h>
 
 struct Node {
-    int index;
     int length;
     struct Node *left;
     struct Node *right;
     char data[256];
 };
 
-
-struct Node * NewNode(int i, char d) {
-    struct Node n = {i, sizeof(d), NULL, NULL, d};
-    return &n;
-}
 
 void insert(struct Node * root, struct Node * newNode) {
     if ((*root).index < (*newNode).index) {
@@ -32,11 +26,28 @@ void insert(struct Node * root, struct Node * newNode) {
     }   
 }
 
-
-
-int main(void) {
- 
+struct Node * newLeaf(char dataArray){
+    if (sizeof(dataArray) > 256) {
+        return NULL;
+    }
+    struct Node leaf;
     
+}
 
-    return 0;
+struct Node * newBranch(struct Node * LLeaf, struct Node * RLeaf){
+    struct Node root;
+    root.length = (*LLeaf).length + (*RLeaf).length; 
+    root.left = LLeaf;
+    root.right = RLeaf;
+
+    return &root;
+}
+
+struct Node * newRoot(struct Node * LNode, struct Node * RNode) {
+    struct Node root;
+    root.length = (*LNode).length + (*RNode).length;
+    root.left = LNode;
+    root.right = RNode;
+
+    return &root;
 }
