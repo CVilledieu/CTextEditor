@@ -8,23 +8,28 @@ struct Node {
 };
 
 
-void insert(struct Node * root, struct Node * newNode) {
-    if ((*root).index < (*newNode).index) {
-        if ((*root).right == NULL) {
-            (*root).right = newNode;
-            return;
-        } else {
-            insert((*root).right, newNode);
-            return;
-        }
-    } else if ((*root).left == NULL) {
-        (*root).left = newNode;
-        return;
-    } else {
-        insert((*root).left, newNode);
-        return;
-    }   
+void rebalanceTree(struct Node * treeRoot) {
+
 }
+
+int insert(struct Node * root, struct Node * newNode) {
+    if (root->left == NULL){
+        root->left = newNode;
+        root->length = newNode->length;
+    } else {
+
+    }
+    int lLen = 0;
+    int rLen = 0;
+    if (root->left != NULL){
+        lLen = root->left->length;
+    }
+    if (root->right != NULL){
+        rLen = root->right->length;
+    }
+    return (lLen + rLen);
+}
+
 
 struct Node * newLeaf(char dataArray){
     if (sizeof(dataArray) > 256) {
