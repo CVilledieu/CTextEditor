@@ -1,21 +1,35 @@
 #include <stdio.h>
 
-struct Node {
+typedef struct {
     int length;
-    struct Node *left;
-    struct Node *right;
+    Node *left;
+    Node *right;
     char data[256];
-};
+} Node;
 
+typedef struct {
+    Node * Head;
+    int length;
+    struct Rope (*newRope)();
+}Rope;
 
-void rebalanceTree(struct Node * treeRoot) {
-
+int insertLeftNode(Node * root, Node * newNode){
+    root->left = newNode;
+    return newNode->length;
 }
 
-int insert(struct Node * root, struct Node * newNode) {
+int insertRightNode(Node * root, Node * newNode) {
+    root->right = newNode;
+    return newNode->length;
+}
+
+int insert(Node * root, Node * newNode) {
     if (root->left == NULL){
         root->left = newNode;
         root->length = newNode->length;
+    } else if (root->right == NULL) {
+        root->right = newNode;
+        root->length += newNode->length;
     } else {
 
     }
@@ -30,29 +44,9 @@ int insert(struct Node * root, struct Node * newNode) {
     return (lLen + rLen);
 }
 
-
-struct Node * newLeaf(char dataArray){
-    if (sizeof(dataArray) > 256) {
-        return NULL;
-    }
-    struct Node leaf;
-    
-}
-
-struct Node * newBranch(struct Node * LLeaf, struct Node * RLeaf){
-    struct Node root;
-    root.length = (*LLeaf).length + (*RLeaf).length; 
-    root.left = LLeaf;
-    root.right = RLeaf;
-
-    return &root;
-}
-
-struct Node * newRoot(struct Node * LNode, struct Node * RNode) {
-    struct Node root;
-    root.length = (*LNode).length + (*RNode).length;
-    root.left = LNode;
-    root.right = RNode;
-
-    return &root;
+struct Rope* newRope(){
+    Rope* rope;
+    rope->length = 0;
+    rope->Head = NULL;
+    return rope;
 }
