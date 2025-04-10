@@ -10,7 +10,7 @@ typedef struct {
 typedef struct {
     Node * Head;
     int length;
-    struct Rope (*newRope)();
+    struct Rope (*newBranch)();
 }Rope;
 
 int insertLeftNode(Node * root, Node * newNode){
@@ -44,9 +44,29 @@ int insert(Node * root, Node * newNode) {
     return (lLen + rLen);
 }
 
+Node* insertNewNode(Node* Root, Node* Leaf){
+    if (Root->right == NULL) {
+        Root->right = Leaf;
+        Root->length += Leaf->length;
+        return Root;
+    } 
+    if (Root->right->data){
+
+    }
+    return Root;
+
+}
+
 struct Rope* newRope(){
     Rope* rope;
     rope->length = 0;
     rope->Head = NULL;
     return rope;
+}
+
+struct Node* AddLeaf(char data[]){
+    int maxSize = 8;
+    if (sizeof(char) > maxSize) {
+        Node* left = AddLeaf(data[0]);
+    }
 }
